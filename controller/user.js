@@ -30,6 +30,12 @@ const readUser = async (req, res) => {
           timestamp: new Date().toLocaleTimeString(),
         });
       }
+    } else {
+      res.status(401).json({
+        status: 401,
+        timestamp: new Date().toLocaleTimeString(),
+        message: "Email tersebut belum terdaftar",
+      });
     }
   } catch (error) {
     res.status(500).json({
