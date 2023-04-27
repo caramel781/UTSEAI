@@ -9,7 +9,7 @@ const createMotor = (body) => {
 const readMotor = (params) => {
   const eachParams = Object.keys(params);
   if (eachParams.length == 0) {
-    const query = `SELECT merk.merk, motor.nama_motor, motor.kapasitas_mesin, motor.kapasitas_tangki, motor.torsi_maksimal FROM motor JOIN merk_motor ON motor.id_merk = merk.id`;
+    const query = `SELECT merk.merk, motor.nama_motor, motor.kapasitas_mesin, motor.kapasitas_tangki, motor.torsi_maksimal FROM motor JOIN merk ON motor.id_merk = merk.id`;
     return database.execute(query);
   } else {
     let param = "";
@@ -17,7 +17,7 @@ const readMotor = (params) => {
       param += `${p}='${params[p]}' AND `;
     });
     param = param.substring(0, param.length - 5);
-    const query = `SELECT merk.merk, motor.nama, motor.kapasitas_mesin, motor.kapasitas_tangki, motor.torsi_maksimal FROM motor JOIN merk_motor ON motor.id_merk = merk.id WHERE ${param}`;
+    const query = `SELECT merk.merk, motor.nama, motor.kapasitas_mesin, motor.kapasitas_tangki, motor.torsi_maksimal FROM motor JOIN merk ON motor.id_merk = merk.id WHERE ${param}`;
     return database.execute(query);
   }
 };
