@@ -4,7 +4,7 @@ const readMerkMotor = async (req, res) => {
   try {
     const [data] = await modelMerk.readMerkMotor();
     res.status(200).json({
-      message: "Data merk mobil berhasil diambil",
+      message: "Data merk motor berhasil diambil",
       status: 200,
       timestamp: new Date().toLocaleTimeString(),
       data,
