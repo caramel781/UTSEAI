@@ -1,15 +1,15 @@
 const database = require("../config/database");
 
 const createMotor = (body) => {
-  const query = `INSERT INTO motor (id_merk, nama, kapasitas_mesin, kapasitas_tangki, torsi_maksimal) 
-                    VALUES (${body.id_merk}, '${body.nama}', '${body.kapasitas_mesin}', '${body.kapasitas_tangki}', '${body.torsi_maksimal}')`;
+  const query = `INSERT INTO motor (id_merk, nama_motor, kapasitas_mesin, kapasitas_tangki, torsi_maksimal) 
+                    VALUES (${body.id_merk}, '${body.nama_motor}', '${body.kapasitas_mesin}', '${body.kapasitas_tangki}', '${body.torsi_maksimal}')`;
   return database.execute(query);
 };
 
 const readMotor = (params) => {
   const eachParams = Object.keys(params);
   if (eachParams.length == 0) {
-    const query = `SELECT merk_motor.merk, motor.nama, motor.kapasitas_mesin, motor.kapasitas_tangki, motor.torsi_maksimal FROM motor JOIN merk_motor ON motor.id_merk = merk_motor.id`;
+    const query = `SELECT merk.merk, motor.nama_motor, motor.kapasitas_mesin, motor.kapasitas_tangki, motor.torsi_maksimal FROM motor JOIN merk_motor ON motor.id_merk = merk.id`;
     return database.execute(query);
   } else {
     let param = "";
@@ -17,7 +17,7 @@ const readMotor = (params) => {
       param += `${p}='${params[p]}' AND `;
     });
     param = param.substring(0, param.length - 5);
-    const query = `SELECT merk_motor.merk, motor.nama, motor.kapasitas_mesin, motor.kapasitas_tangki, motor.torsi_maksimal FROM motor JOIN merk_motor ON motor.id_merk = merk_motor.id WHERE ${param}`;
+    const query = `SELECT merk.merk, motor.nama, motor.kapasitas_mesin, motor.kapasitas_tangki, motor.torsi_maksimal FROM motor JOIN merk_motor ON motor.id_merk = merk.id WHERE ${param}`;
     return database.execute(query);
   }
 };
